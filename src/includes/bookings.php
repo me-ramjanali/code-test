@@ -76,13 +76,11 @@ class Bookings extends Database
         // insert booking
         $insert_booking_query = "
           insert into bookings(
-            participation_id,
             event_id,
             employee_name, 
             employee_mail, 
             created_at
           ) values(
-            '" . $this->connect()->real_escape_string($booking->participation_id) . "',
             '" . $this->connect()->real_escape_string($booking->event_id) . "', 
             '" . $this->connect()->real_escape_string($booking->employee_name) . "', 
             '" . $this->connect()->real_escape_string($booking->employee_mail) . "',
