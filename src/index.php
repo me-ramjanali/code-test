@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,10 +11,19 @@
 <body>
   <div class="container">
     <div class="jumbotron">
-      <h1 class="display-4">Upload Booking...</h1>
-      <form id="uploadForm" class="was-validated" action="./process_form" method="post" enctype="multipart/form-data">
+      <?php
+      if (isset($_SESSION['flash'])) {
+      ?>
+        <div class="alert alert-danger" role="alert">
+          <?= $_SESSION['flash'] ?>
+        </div>
+      <?php
+      }
+      ?>
+      <h1 class="display-4">Upload Booking...<a href="/view" class="btn btn-primary mb-2 float-right">View Data</a></h1>
+      <form id="uploadForm" class="was-validated" action="process_form.php" method="POST" enctype="multipart/form-data">
         <div class="custom-file">
-          <input require name="jsonFile" type="file" class="custom-file-input" id="customFile">
+          <input name="jsonFile" type="file" class="custom-file-input" id="customFile" />
           <label class="custom-file-label" for="customFile">Choose file</label>
           <div class="invalid-feedback">Example invalid custom file feedback</div>
         </div>
@@ -47,3 +57,7 @@
 </body>
 
 </html>
+<?php
+session_unset();
+session_destroy();
+?>
